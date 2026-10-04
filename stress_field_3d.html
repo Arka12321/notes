@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Linear Isotropic Stress–Strain Relation</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    window.MathJax = {
+      tex: {
+        tags: 'ams',
+        inlineMath: [['\\(', '\\)']],
+        macros: {
+          tr: '\\operatorname{tr}',
+          bm: ['{\\boldsymbol{#1}}', 1]
+        }
+      }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<main>
+<p class="back"><a href="index.html">← All derivations</a></p>
+<h1>Derivation of the Linear Isotropic Stress–Strain Relation</h1>
+
+<p>The target result is</p>
+\begin{equation}
+  \bm{\sigma} = \lambda\,\tr(\bm{\varepsilon})\,\mathbf{I} + 2\mu\,\bm{\varepsilon},
+  \qquad\text{i.e.}\qquad
+  \sigma_{ij} = \lambda\,\varepsilon_{kk}\,\delta_{ij} + 2\mu\,\varepsilon_{ij}.
+  \label{eq:target}
+\end{equation}
+<p>Assumptions: the material is <em>linear</em> (small strains), <em>isotropic</em>
+(the same in all directions), and has an <em>elastic energy</em> that depends only
+on the strain.</p>
+
+<h2>Setup: the strain tensor</h2>
+<p>For a displacement field \(\mathbf{u}(\mathbf{x})\),</p>
+\begin{equation}
+  \varepsilon_{ij} = \frac{1}{2}\left(\frac{\partial u_i}{\partial x_j}
+  + \frac{\partial u_j}{\partial x_i}\right),
+  \qquad \varepsilon_{ij}=\varepsilon_{ji}.
+\end{equation}
+<p>The symmetric part is kept because the antisymmetric part is a rigid rotation,
+which does not deform the material. The trace</p>
+\begin{equation}
+  \tr\bm{\varepsilon} = \varepsilon_{kk} = \varepsilon_{11}+\varepsilon_{22}+\varepsilon_{33}
+\end{equation}
+<p>measures the relative volume change.</p>
+
+<h2>Derivation 1: from the elastic energy</h2>
+
+<h3>Step 1: stress from energy.</h3>
+<p>Let \(\Psi(\bm{\varepsilon})\) be the elastic energy per unit volume. Define</p>
+\begin{equation}
+  \sigma_{ij} = \frac{\partial \Psi}{\partial \varepsilon_{ij}},
+\end{equation}
+<p>the 3D analogue of \(F=-dU/dx\) for a spring.</p>
+
+<h3>Step 2: Ψ is quadratic.</h3>
+<p>Linear elasticity means \(\sigma\) is linear in \(\varepsilon\). Since the derivative
+of a quadratic form is linear, \(\Psi\) must be quadratic in \(\varepsilon\).
+(There is no constant or linear term: the unstrained state has zero energy and
+zero stress.)</p>
+
+<h3>Step 3: Ψ is rotation invariant.</h3>
+<p>For an isotropic material, \(\Psi\) must be a scalar that does not change under a
+rotation of coordinates, \(\bm{\varepsilon}\to \mathbf{R}\bm{\varepsilon}\mathbf{R}^{T}\).
+The only quadratic rotation invariants of a symmetric tensor are</p>
+\begin{equation}
+  (\tr\bm{\varepsilon})^2
+  \qquad\text{and}\qquad
+  \tr(\bm{\varepsilon}^2)=\varepsilon_{ij}\varepsilon_{ij}.
+\end{equation}
+<p>Hence the most general form has two constants,</p>
+\begin{equation}
+  \Psi = \frac{1}{2}\lambda\,(\tr\bm{\varepsilon})^2 + \mu\,\varepsilon_{ij}\varepsilon_{ij}.
+  \label{eq:psi}
+\end{equation}
+<p>This defines the Lamé parameters \(\lambda\) and \(\mu\).</p>
+
+<h3>Step 4: differentiate.</h3>
+<p>Treating the components of \(\bm{\varepsilon}\) as independent,</p>
+\begin{align}
+  \frac{\partial (\tr\bm{\varepsilon})^2}{\partial \varepsilon_{ij}}
+    &= 2\,\tr(\bm{\varepsilon})\,\frac{\partial \varepsilon_{kk}}{\partial \varepsilon_{ij}}
+     = 2\,\tr(\bm{\varepsilon})\,\delta_{ij}, \\
+  \frac{\partial (\varepsilon_{kl}\varepsilon_{kl})}{\partial \varepsilon_{ij}}
+    &= 2\,\varepsilon_{ij}.
+\end{align}
+<p>Therefore</p>
+\begin{equation}
+  \sigma_{ij}
+  = \frac{1}{2}\lambda\cdot 2\,\tr(\bm{\varepsilon})\,\delta_{ij} + \mu\cdot 2\,\varepsilon_{ij}
+  = \lambda\,\tr(\bm{\varepsilon})\,\delta_{ij} + 2\mu\,\varepsilon_{ij},
+\end{equation}
+<p>which is Eq. \(\eqref{eq:target}\). The factor 2 in front of \(\mu\) comes from
+differentiating the square.</p>
+
+<h2>Derivation 2: from symmetry alone</h2>
+
+<h3>Step 1: most general linear law.</h3>
+\begin{equation}
+  \sigma_{ij} = C_{ijkl}\,\varepsilon_{kl},
+\end{equation}
+<p>where \(C_{ijkl}\) has \(3^4 = 81\) components.</p>
+
+<h3>Step 2: reduce the number of constants.</h3>
+<ul>
+  <li>\(\sigma_{ij}=\sigma_{ji}\) and \(\varepsilon_{kl}=\varepsilon_{lk}\) give
+      \(C_{ijkl}=C_{jikl}=C_{ijlk}\), leaving 36 constants.</li>
+  <li>Existence of an energy,
+      \(C_{ijkl}=\partial^2\Psi/\partial\varepsilon_{ij}\partial\varepsilon_{kl}=C_{klij}\),
+      leaves 21 constants (the most general anisotropic crystal).</li>
+  <li>Isotropy requires \(C_{ijkl}\) to take the same form in every rotated frame.</li>
+</ul>
+
+<h3>Step 3: isotropic rank-4 tensors.</h3>
+<p>The only rank-4 tensors invariant under all rotations are built from \(\delta_{ij}\):</p>
+\begin{equation}
+  C_{ijkl} = \alpha\,\delta_{ij}\delta_{kl} + \beta\,\delta_{ik}\delta_{jl} + \gamma\,\delta_{il}\delta_{jk}.
+\end{equation}
+<p>The symmetry \(C_{ijkl}=C_{ijlk}\) forces \(\beta=\gamma\). Renaming \(\alpha=\lambda\) and
+\(\beta=\gamma=\mu\),</p>
+\begin{equation}
+  C_{ijkl} = \lambda\,\delta_{ij}\delta_{kl} + \mu\left(\delta_{ik}\delta_{jl} + \delta_{il}\delta_{jk}\right).
+\end{equation}
+
+<h3>Step 4: contract with the strain.</h3>
+\begin{align}
+  \sigma_{ij} = C_{ijkl}\,\varepsilon_{kl}
+  &= \lambda\,\delta_{ij}\,\delta_{kl}\varepsilon_{kl}
+     + \mu\left(\delta_{ik}\delta_{jl}\varepsilon_{kl} + \delta_{il}\delta_{jk}\varepsilon_{kl}\right) \nonumber\\
+  &= \lambda\,\delta_{ij}\,\varepsilon_{kk} + \mu\left(\varepsilon_{ij} + \varepsilon_{ji}\right) \nonumber\\
+  &= \lambda\,\tr(\bm{\varepsilon})\,\delta_{ij} + 2\mu\,\varepsilon_{ij},
+\end{align}
+<p>using \(\varepsilon_{ji}=\varepsilon_{ij}\). Again Eq. \(\eqref{eq:target}\).</p>
+
+<h2>Check: μ is the shear modulus</h2>
+<p>Apply a simple shear with only \(\varepsilon_{12}=\varepsilon_{21}=\gamma/2\) nonzero, where \(\gamma\)
+is the change in angle. Then \(\tr\bm{\varepsilon}=0\) and</p>
+\begin{equation}
+  \sigma_{12} = 2\mu\,\frac{\gamma}{2} = \mu\,\gamma .
+\end{equation}
+<p>Shear stress equals \(\mu\) times the shear angle, so \(\mu\) is the shear modulus.</p>
+
+<h2>Volumetric–deviatoric split</h2>
+<p>Decompose the strain into a trace part and a traceless (deviatoric) part:</p>
+\begin{equation}
+  \bm{\varepsilon} = \bm{\varepsilon}_{\mathrm{dev}} + \frac{1}{3}\tr(\bm{\varepsilon})\,\mathbf{I},
+  \qquad \tr\bm{\varepsilon}_{\mathrm{dev}} = 0 .
+\end{equation}
+<p>Then</p>
+\begin{equation}
+  \varepsilon_{ij}\varepsilon_{ij}
+  = \bm{\varepsilon}_{\mathrm{dev}}:\bm{\varepsilon}_{\mathrm{dev}} + \frac{1}{3}(\tr\bm{\varepsilon})^2,
+\end{equation}
+<p>and substituting into Eq. \(\eqref{eq:psi}\) gives</p>
+\begin{equation}
+  \Psi = \frac{1}{2}\,K\,(\tr\bm{\varepsilon})^2 + \mu\,\bm{\varepsilon}_{\mathrm{dev}}:\bm{\varepsilon}_{\mathrm{dev}},
+  \qquad K = \lambda + \frac{2}{3}\mu .
+\end{equation}
+<p>So an isotropic solid resists <em>volume change</em> through the bulk modulus \(K\) and
+<em>shape change</em> through \(\mu\).</p>
+
+<h2>Relation to E and ν</h2>
+\begin{equation}
+  \lambda = \frac{E\nu}{(1+\nu)(1-2\nu)}, \qquad
+  \mu = \frac{E}{2(1+\nu)} .
+\end{equation}
+
+</main>
+</body>
+</html>
